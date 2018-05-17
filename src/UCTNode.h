@@ -81,6 +81,8 @@ public:
     UCTNode* get_nopass_child(FastState& state) const;
     std::unique_ptr<UCTNode> find_child(const int move);
     void inflate_all_children();
+    void kill_superkos(const KoState& state);
+    void dirichlet_noise(float epsilon, float alpha);
 
 private:
     enum Status : char {
@@ -93,8 +95,6 @@ private:
                        float min_psa_ratio);
     double get_blackevals() const;
     void accumulate_eval(float eval);
-    void kill_superkos(const KoState& state);
-    void dirichlet_noise(float epsilon, float alpha);
 
     // Note : This class is very size-sensitive as we are going to create
     // tens of millions of instances of these.  Please put extra caution
